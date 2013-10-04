@@ -1,5 +1,7 @@
 package org.min.packtarea1;
 
+import weka.core.Instances;
+
 public class Main {
 
 	public static void main(String[] args) {

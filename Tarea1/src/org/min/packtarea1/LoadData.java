@@ -10,44 +10,41 @@ import weka.core.Instances;
 
 public class LoadData {
 
-	//Atributos
 	private String path;
 	
-	//Constructora
+	
 	public LoadData(String pPath) {
 		this.path = pPath;
 	}
-	//metodos
+	
 	public Instances cargarDatos() {
-		// Abrimos el fichero
+		// In this code we will open the file.
 	    FileReader fi=null;
 		try {
-			fi= new FileReader(this.getPath()); //(args[0])
+			fi= new FileReader(this.getPath());
 		} catch (FileNotFoundException e) {
-			System.out.println("ERROR: Revisar path del fichero de datos:"+this.getPath());
+			System.out.println("ERROR: Please check if the pack that you use is correct:"+this.getPath());
 		}
-		// Cargamos las instancias
+		// Load the instances
 		Instances data=null;
 		try {
 			data = new Instances(fi);
 		} catch (IOException e) {
-			System.out.println("ERROR: Revisar contenido del fichero de datos: "+this.getPath());
+			System.out.println("ERROR: Check file format. This program requires a *.arff file: "+this.getPath());
 		}
-		// Cerramos el fichero de datos
+		// Close data file.
 		try {
 			fi.close();
 		} catch (IOException e) {
-			System.out.println("Se ha producido un error a la hora de cerrar el fichero");
+			System.out.println("There is an error with de data file when the program trys to close it");
 		}
 		
-		// Mezclar las instancias, aplicar un filtro de Randomize.
+		// Mix the instances using Randomize class and randomize method.
 		Random rdm = new Random(45);
 		data.randomize(rdm);
 
 		
-		
-		//Preguntar por ésta parte
-		// 1.6. Specify which attribute will be used as the class: the last one, in this case 
+		// Specify which attribute will be used as the class: the last one, in this case 
 		data.setClassIndex(data.numAttributes()-1);
 		
 		return data;
