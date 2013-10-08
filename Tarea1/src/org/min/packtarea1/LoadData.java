@@ -17,7 +17,9 @@ public class LoadData {
 		this.path = pPath;
 	}
 	
-	public Instances cargarDatos() {
+	//In this section we will obtain instances on a *.arff
+	
+	public Instances loadInstances() {
 		// In this code we will open the file.
 	    FileReader fi=null;
 		try {

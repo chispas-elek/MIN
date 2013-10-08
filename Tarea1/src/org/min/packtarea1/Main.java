@@ -11,7 +11,14 @@ public class Main {
 		loadP.load();
 
 		//Load *.arff file, randomize and create train and test files.
+		LoadData loadD = new LoadData(loadP.getData());
+		Instances data = loadD.loadInstances();
 		
+		//Split instances into Train and Test sets.
+		DataSelect dataS = new DataSelect();
+		dataS.select(data);
+		
+		//Apply Minkowsky
 		
 	}
 
