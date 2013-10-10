@@ -21,6 +21,7 @@ public class Minkowsky {
 		this.k = pK;
 		this.n = pN;
 		this.m = pM;
+		//Generación de una lista dinámica de elementos impar
 	}
 	
 	/**
