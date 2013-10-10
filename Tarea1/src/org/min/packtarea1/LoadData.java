@@ -17,8 +17,10 @@ public class LoadData {
 		this.path = pPath;
 	}
 	
-	//In this section we will obtain instances on a *.arff
-	
+	/**
+	 * In this section we will obtain instances on a *.arff
+	 * @return instances of a .arff file
+	*/
 	public Instances loadInstances() {
 		// In this code we will open the file.
 	    FileReader fi=null;
