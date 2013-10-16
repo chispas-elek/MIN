@@ -6,7 +6,6 @@ import java.util.Vector;
 public class ListDistIndex {
 	
 	private Vector<DistIndex> lDistances;
-	private double maxDistance;
 	
 	/**
 	 * This class is in charge of controlling the nearest K neighbours with their distances
@@ -18,15 +17,10 @@ public class ListDistIndex {
 	 * @param pK Value of the wanted neighbours to check.
 	 */
 	
-	public ListDistIndex(int pK) {
-		if((pK % 2) == 0) {
-			this.lDistances = new Vector<DistIndex>(pK+1);
-		} else {
-			this.lDistances = new Vector<DistIndex>(pK);
-		}
-		this.maxDistance = -1;
+	public ListDistIndex() {
+		this.lDistances = new Vector<DistIndex>();	
 	}
-	
+	/*
 	public void insert(DistIndex pDistIndex) {
 		if(lDistances.size() < lDistances.capacity()) {
 			lDistances.add(pDistIndex);
@@ -56,19 +50,70 @@ public class ListDistIndex {
 			}
 		}
 	}
-	
+	*/
 	private Iterator<DistIndex> getIterator() {
 		return this.lDistances.iterator();
 	}
 
-	private double getMaxDistance() {
-		return maxDistance;
-	}
-
-	private void setMaxDistance(double maxDistance) {
-		this.maxDistance = maxDistance;
+	public void insert(DistIndex pDI) {
+		Iterator<DistIndex> it = this.getIterator();
+		DistIndex actual = null;
+		boolean inserted = false;
+		int i = 0;
+		while(it.hasNext() && !inserted) {
+			actual = it.next();
+			if(pDI.getValue() < actual.getValue()) {
+				this.lDistances.add(i, pDI);
+				inserted = true;
+			}
+			i++;
+		}
+		if(!inserted) {
+			this.lDistances.add(pDI);
+		}
+		
 	}
 	
+	public void hash() {
+		Iterator<DistIndex> it = this.getIterator();
+		DistIndex actual = null;
+		int index = 0;
+		double dist = -1;
+		while(it.hasNext()) {
+			actual = it.next();
+			if(actual.getValue() > dist) {
+				dist = actual.getValue();
+				index++;
+			}
+			actual.setIndex(index);
+			
+		}
+	}
 	
+	public ListDistIndex kReload(int pK) {
+		ListDistIndex kLoad = new ListDistIndex();
+		int counter = 0;
+		if(this.countByIndex(pK) > pK) {
+			
+		}
+		return kLoad;
+	}
+	
+	private int countByIndex(int pIndex) {
+		int available = 0;
+		boolean over = false;
+		Iterator<DistIndex> it = this.getIterator();
+		DistIndex actual = null;
+		while(it.hasNext() && !over) {
+			actual = it.next();
+			if(actual.getIndex() > pIndex) {
+				over = true;
+			}
+			else {
+				available++;
+			}
+		}
+		return available;
+	}
 
 }

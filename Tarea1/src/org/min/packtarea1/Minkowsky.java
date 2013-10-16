@@ -34,21 +34,27 @@ public class Minkowsky {
 	
 	public Vector<String> calculate(Instances pTrain,Instances pTestUnclass) {
 		Vector<String> result= new Vector<String>();
+		ListDistIndex indexedDist = new ListDistIndex();
+		DistIndex couple = null;
 		double acum = 0;
 		double distance = 0;
 		for(int i=0;i<pTestUnclass.numInstances();i++) {
 			for(int j=0;j<pTrain.numInstances();j++) {
 				for(int l=0;l<this.getN();l++) {
 					//Aqui se acumula las sumas
-					acum = acum + Math.abs(Math.pow(pTestUnclass.get(i).value(l) - pTrain.get(j).value(l),this.getM()));
+					acum = acum + Math.pow(Math.abs(pTestUnclass.instance(i).value(l) - pTrain.instance(j).value(l)),this.getM());
 				}
-				//Aquí se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
+				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 				distance = Math.pow(acum, 1/this.getM());
 				//Guardar el resultado de forma ordenada.
-				
+				couple = new DistIndex(j, distance);
+				indexedDist.insert(couple);
 			}
-			//Aquí clasificamos la instancia y se guarda ene l vector de l distances.
+			//Aqui clasificamos la instancia y se guarda ene l vector de l distances.
 			//LLamar a otra clase que gestione los posibles conflictos.
+			indexedDist.hash();
+			ListDistIndex kNeeded = 
+			
 		}
 		return result;
 	}
