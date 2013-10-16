@@ -3,6 +3,8 @@ package org.min.packtarea1;
 import java.util.Iterator;
 import java.util.Vector;
 
+import weka.core.Instances;
+
 public class ListDistIndex {
 	
 	private Vector<DistIndex> lDistances;
@@ -74,6 +76,15 @@ public class ListDistIndex {
 		
 	}
 	
+	public void insertList(ListDistIndex pList) {
+		Iterator<DistIndex> it = pList.getIterator();
+		DistIndex di = null;
+		while(it.hasNext()) {
+			di = it.next();
+			this.insert(di);
+		}
+	}
+	
 	public void hash() {
 		Iterator<DistIndex> it = this.getIterator();
 		DistIndex actual = null;
@@ -90,17 +101,8 @@ public class ListDistIndex {
 		}
 	}
 	
-	public ListDistIndex kReload(int pK) {
-		ListDistIndex kLoad = new ListDistIndex();
-		int counter = 0;
-		if(this.countByIndex(pK) > pK) {
-			
-		}
-		return kLoad;
-	}
-	
-	private int countByIndex(int pIndex) {
-		int available = 0;
+	public ListDistIndex returnIndex(int pIndex) {
+		ListDistIndex available = new ListDistIndex();
 		boolean over = false;
 		Iterator<DistIndex> it = this.getIterator();
 		DistIndex actual = null;
@@ -110,10 +112,29 @@ public class ListDistIndex {
 				over = true;
 			}
 			else {
-				available++;
+				available.insert(actual);
 			}
 		}
 		return available;
 	}
-
+	
+	public int size() {
+		return this.lDistances.size();
+	}
+	
+	public DistIndex element(int pI) {
+		return this.lDistances.elementAt(pI);
+	}
+	
+	public ListEvaluation sign(Instances pTrainSet, int pN) {
+		Iterator<DistIndex> it = this.getIterator();
+		DistIndex di = null;
+		ListEvaluation le = new ListEvaluation();
+		while(it.hasNext()) {
+			di = it.next();
+			Evaluation ev = new Evaluation(pTrainSet.attribute(di.getPosition()).value(pN));
+			le.vote(ev);
+		}
+		return le;
+	}
 }

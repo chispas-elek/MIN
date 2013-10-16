@@ -1,13 +1,13 @@
 package org.min.packtarea1;
 
+import java.util.Random;
 import java.util.Vector;
-import java.util.Iterator;
+
 import weka.core.Instances;
 
 public class Minkowsky {
 
 	private int k,n,m;
-	private Vector<Double> ldistances;
 	
 	/**
 	 * The purpose of this class is to clasify number of different instances using
@@ -17,11 +17,10 @@ public class Minkowsky {
 	 * @param pN the value of the number of parameters in the data set.
 	 * @param pM the value to use Minkownsky algorithm.
 	 */
-	public Minkowsky(int pK,int pN,int pM) {
+	public Minkowsky(int pK,int pM) {
 		this.k = pK;
-		this.n = pN;
+		this.n = 0;
 		this.m = pM;
-		//Generación de una lista dinámica de elementos impar
 	}
 	
 	/**
@@ -33,6 +32,7 @@ public class Minkowsky {
 	 */
 	
 	public Vector<String> calculate(Instances pTrain,Instances pTestUnclass) {
+		this.calculateN(pTrain);
 		Vector<String> result= new Vector<String>();
 		ListDistIndex indexedDist = new ListDistIndex();
 		DistIndex couple = null;
@@ -53,43 +53,66 @@ public class Minkowsky {
 			//Aqui clasificamos la instancia y se guarda ene l vector de l distances.
 			//LLamar a otra clase que gestione los posibles conflictos.
 			indexedDist.hash();
-			ListDistIndex kNeeded = 
-			
+			ListDistIndex neighbours = this.kReload(this.getK(), indexedDist);
+			//Clasificar
+			result.add(this.clasify(neighbours, pTrain));
 		}
 		return result;
+	}
+	
+	private String clasify(ListDistIndex pNeighbours, Instances pTrainSet) {
+		ListEvaluation lClas = pNeighbours.sign(pTrainSet, this.getN());
+		return lClas.topVoted();
+	}
+	
+	private ListDistIndex kReload(int pK, ListDistIndex pList) {
+		ListDistIndex kLoad = new ListDistIndex();
+		int counter = 1;
+		while(kLoad.size() < pK) {
+			ListDistIndex elements = pList.returnIndex(counter);
+			if(elements.size() == pK - kLoad.size()) {
+				kLoad.insertList(elements);
+			}else if (elements.size() < pK - kLoad.size()){
+				kLoad.insertList(elements);
+				counter++;
+			}else if (elements.size() > pK - kLoad.size()){
+				Random rnd = new Random(pK);
+				while(kLoad.size() < pK) {
+					kLoad.insert(elements.element(rnd.nextInt()));
+				}	
+			}
+		}
+		return kLoad;
 	}
 
 	private int getK() {
 		return k;
 	}
 
-	private void setK(int k) {
-		this.k = k;
-	}
-
 	private int getN() {
 		return n;
-	}
-
-	private void setN(int n) {
-		this.n = n;
 	}
 
 	private int getM() {
 		return m;
 	}
-
-	private void setM(int m) {
-		this.m = m;
-	}
-
-	private Vector getLdistances() {
-		return ldistances;
-	}
-
-	private void setLdistances(Vector ldistances) {
-		this.ldistances = ldistances;
+	
+	private void setN(int pN) {
+		this.n = pN;
 	}
 	
-	
+	private void calculateN(Instances pInst) {
+		int n = 1;
+		int count = 0;
+		char x;
+		String str = pInst.firstInstance().toString();
+		while(count < str.length()) {
+			x = str.charAt(count);
+			if(x == ',') {
+				n++;
+			}
+			count++;
+		}
+		this.setN(n);
+	}
 }
