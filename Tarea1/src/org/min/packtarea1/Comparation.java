@@ -20,12 +20,8 @@ public class Comparation {
 		while(itP.hasNext() && itR.hasNext()) {
 			sPred = itP.next();
 			sReal = itR.next();
-			this.adjust(sPred, sReal);
+			cm.insert(sPred, sPred);
 		}
 		return cm;
-	}
-	
-	private void adjust(String sPred, String sReal) {
-		
 	}
 }

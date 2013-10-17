@@ -1,6 +1,7 @@
 package org.min.packtarea1;
 
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Vector;
 
 public class ListEvaluation {
@@ -25,6 +26,13 @@ public class ListEvaluation {
 			if(eval.getCounter() > i) {
 				i = eval.getCounter();
 				voted = eval.getName();
+			}else if(eval.getCounter() == i) {
+				Random rnd = new Random(45);
+				boolean taker = rnd.nextBoolean();
+				if(taker) {
+					i = eval.getCounter();
+					voted = eval.getName();
+				}
 			}
 		}
 		return voted;
