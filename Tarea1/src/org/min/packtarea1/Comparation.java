@@ -20,7 +20,7 @@ public class Comparation {
 		while(itP.hasNext() && itR.hasNext()) {
 			sPred = itP.next();
 			sReal = itR.next();
-			cm.insert(sPred, sPred);
+			cm.insert(sPred, sReal);
 		}
 		return cm;
 	}
