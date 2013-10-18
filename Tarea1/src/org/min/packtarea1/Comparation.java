@@ -12,7 +12,8 @@ public class Comparation {
 		this.real = pReal;
 	}
 	
-	public ConfMatrix operate(int pC) {
+	public ConfMatrix operate() {
+		int pC = this.calculatePC();
 		ConfMatrix cm = new ConfMatrix(pC);
 		Iterator<String> itP = this.predicted.iterator();
 		Iterator<String> itR = this.real.iterator();
@@ -23,5 +24,15 @@ public class Comparation {
 			cm.insert(sPred, sReal);
 		}
 		return cm;
+	}
+	
+	private int calculatePC() {
+		Vector<String> acumulate = new Vector<String>();
+		Iterator<String> it = this.real.iterator();
+		String str;
+		while(it.hasNext()) {
+			str = it.next();
+		}
+		return acumulate.size();
 	}
 }
