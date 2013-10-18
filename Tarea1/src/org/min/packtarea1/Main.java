@@ -1,5 +1,7 @@
 package org.min.packtarea1;
 
+import java.util.Vector;
+
 import weka.core.Instances;
 
 public class Main {
@@ -19,7 +21,10 @@ public class Main {
 		dataS.select(data);
 		
 		//Apply Minkowsky
+		Minkowsky mk = new Minkowsky(Integer.parseInt(loadP.getK()), Integer.parseInt(loadP.getM()));
+		Vector<String> result = mk.calculate(dataS.getTrain(), dataS.getTestUnclass());
 		
+		Comparation cmp = new Comparation(result, dataS.getTestClass());
 		
 	}
 

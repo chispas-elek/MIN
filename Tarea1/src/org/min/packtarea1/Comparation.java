@@ -27,12 +27,17 @@ public class Comparation {
 	}
 	
 	private int calculatePC() {
-		Vector<String> acumulate = new Vector<String>();
+		Vect vc = new Vect();
 		Iterator<String> it = this.real.iterator();
+		int i = 0;
 		String str;
 		while(it.hasNext()) {
 			str = it.next();
+			if(!vc.exists(str)) {
+				i++;
+				vc.add(str);
+			}
 		}
-		return acumulate.size();
+		return i;
 	}
 }

@@ -22,6 +22,7 @@ public class ListDistIndex {
 	public ListDistIndex() {
 		this.lDistances = new Vector<DistIndex>();	
 	}
+	
 	/*
 	public void insert(DistIndex pDistIndex) {
 		if(lDistances.size() < lDistances.capacity()) {
