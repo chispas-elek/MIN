@@ -4,6 +4,8 @@ import java.util.Random;
 import java.util.Vector;
 
 import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
 
 public class DataSelect {
 
@@ -29,7 +31,7 @@ public class DataSelect {
 	 * 
 	 * @param pData instances to split.
 	 */
-	public void select(Instances pData) {
+	public void select(Instances pData) throws Exception{
 		pData.randomize(new Random(45));
 		
 		//In this part, we will generate test, train and testUnclass files
@@ -40,7 +42,10 @@ public class DataSelect {
 		
 		
 		Instances unclass = this.getTest();
-		unclass.deleteAttributeAt(this.getTest().classIndex());
+		Remove remove = new Remove();
+		remove.setAttributeIndices("unclass.classIndex()");
+		remove.setInputFormat(unclass);
+		unclass = Filter.useFilter(unclass, remove);
 		this.setTestUnclass(unclass);
 		
 		SaveData.guardarResultado("TrainSet", this.getTrain());

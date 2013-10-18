@@ -4,7 +4,7 @@ import weka.core.Instances;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		//Load properties file
 		LoadProperties loadP = new LoadProperties(args[0]);
