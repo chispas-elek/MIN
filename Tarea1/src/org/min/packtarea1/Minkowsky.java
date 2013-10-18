@@ -17,9 +17,9 @@ public class Minkowsky {
 	 * @param pN the value of the number of parameters in the data set.
 	 * @param pM the value to use Minkownsky algorithm.
 	 */
-	public Minkowsky(int pK,int pM) {
+	public Minkowsky(int pK,int pM, int pN) {
 		this.k = pK;
-		this.n = 0;
+		this.n = pN;
 		this.m = pM;
 	}
 	
@@ -32,7 +32,6 @@ public class Minkowsky {
 	 */
 	
 	public Vector<String> calculate(Instances pTrain,Instances pTestUnclass) {
-		this.calculateN(pTrain);
 		Vector<String> result= new Vector<String>();
 		ListDistIndex indexedDist = new ListDistIndex();
 		DistIndex couple = null;
@@ -95,24 +94,5 @@ public class Minkowsky {
 
 	private int getM() {
 		return m;
-	}
-	
-	private void setN(int pN) {
-		this.n = pN;
-	}
-	
-	private void calculateN(Instances pInst) {
-		int n = 1;
-		int count = 0;
-		char x;
-		String str = pInst.firstInstance().toString();
-		while(count < str.length()) {
-			x = str.charAt(count);
-			if(x == ',') {
-				n++;
-			}
-			count++;
-		}
-		this.setN(n);
 	}
 }

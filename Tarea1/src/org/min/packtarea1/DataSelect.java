@@ -1,6 +1,7 @@
 package org.min.packtarea1;
 
 import java.util.Random;
+import java.util.Vector;
 
 import weka.core.Instances;
 
@@ -41,6 +42,33 @@ public class DataSelect {
 		Instances unclass = this.getTest();
 		unclass.deleteAttributeAt(this.getTest().classIndex());
 		this.setTestUnclass(unclass);
+		
+		SaveData.guardarResultado("TrainSet", this.getTrain());
+		SaveData.guardarResultado("TestSet", this.getTest());
+		SaveData.guardarResultado("UnclassSet", this.testUnclass);
+	}
+	
+	public Vector<String> testClass() {
+		Vector<String> pStr = new Vector<String>();
+		for(int i = 0; i < this.getTest().numInstances(); i++) {
+			pStr.add(this.getTest().instance(i).attribute(this.calculateN()).toString());
+		}
+		return pStr;
+	}
+	
+	public int calculateN() {
+		int n = 1;
+		int count = 0;
+		char x;
+		String str = this.getTrain().firstInstance().toString();
+		while(count < str.length()) {
+			x = str.charAt(count);
+			if(x == ',') {
+				n++;
+			}
+			count++;
+		}
+		return n;
 	}
 
 	/**
