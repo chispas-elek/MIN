@@ -1,25 +1,26 @@
-package org.min.packtarea1;
+package org.min.packkmean;
 
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-
-import weka.core.Instances;
-import weka.core.converters.ArffSaver;
+import java.util.Vector;
 
 public class SaveData {
 
-	//En un principio la idea es que los datos se guarden en el mismo path del eclipse, luego se pensará opciones diferentes
-	
-	//Constructora
+	/**
+	 * El objetivo primordial de ésta clase es guardar los datos que deseemos en el disco duro para observar resultados.
+	 */
 	public SaveData() {
 		
 	}
 	
-	//Metodos
-	//Antiguo método para guardar resultados
-	public static void guardarResultado(String pNombreFichero, Instances pData) {
+	/**
+	 * Se encarga de guardar los resultados en un fichero con extensión *.arff
+	 * @param pNombreFichero El nombre que va a tener el fichero.
+	 * @param pData Los datos que van a ser guardados.
+	 */
+	public static void guardarResultado(String pNombreFichero, Vector pData) {
 		File fichero = new File(pNombreFichero);
 		if(!fichero.exists()) {
 			//No existe duplicado
@@ -52,9 +53,14 @@ public class SaveData {
 		}
 	}
 	
-	//Con el siguiente método se intenta escribir los resultados obtenidos
+	/**
+	 * Se encarga de guardar los resultados de un evaluador en el disco duro.
+	 * @param pNombreFichero
+	 * @param pTest
+	 * @param pPrediction
+	 */
 	
-	public static void escribirResultadosEvaluador(String pNombreFichero,Instances pTest,double[] pPrediction){
+	public static void escribirResultadosEvaluador(String pNombreFichero,Vector pTest,double[] pPrediction){
 		File fichero = new File(pNombreFichero);
 		if(!fichero.exists()) {
 			//No existen duplicados
@@ -77,15 +83,4 @@ public class SaveData {
 		}
 	}
 	
-	public static void guardarResultadoConWeka(String pNombreFichero, Instances pData) {
-		ArffSaver save = new ArffSaver();
-		save.setInstances(pData);
-		try{
-			save.setFile(new File(pNombreFichero));
-			save.writeBatch();
-			System.out.println("El fichero "+pNombreFichero+" ha sido creado satisfactoriamente");
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
 }
