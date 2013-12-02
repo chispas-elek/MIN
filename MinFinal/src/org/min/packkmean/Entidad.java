@@ -10,10 +10,17 @@ public class Entidad {
 	}
 	
 	private void buscarAtributos(String pString) {
-		String atributo = null;
+		int j = 0;
 		for(int i = 0; i < pString.length(); i++) {
-			
+			if(pString.charAt(i) == ',') {
+				atributos.anadir(pString.substring(j, i-1));
+				j = i;
+			}
 		}
+	}
+	
+	public String atributo(int i){
+		return atributos.atributo(i);
 	}
 
 }

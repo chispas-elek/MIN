@@ -10,5 +10,13 @@ public class ListaAtributos {
 	public ListaAtributos() {
 		lAtributos = new Vector<String>();
 	}
+	
+	public void anadir(String pString) {
+		lAtributos.add(pString);
+	}
+	
+	public String atributo(int i) {
+		return lAtributos.elementAt(i);
+	}
 
 }

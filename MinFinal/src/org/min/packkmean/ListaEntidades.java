@@ -13,4 +13,12 @@ public class ListaEntidades {
 	public void anadir(Entidad pEntidad) {
 		this.lEntidades.add(pEntidad);
 	}
+	
+	public Entidad entidad(int i) {
+		return lEntidades.elementAt(i);
+	}
+	
+	public int size() {
+		return lEntidades.size();
+	}
 }

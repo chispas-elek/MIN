@@ -127,7 +127,7 @@ public class ListDistIndex {
 		return this.lDistances.elementAt(pI);
 	}
 	
-	public ListEvaluation sign(Vector<String> pTrainSet, int pN) {
+	public ListEvaluation sign(ListaEntidades pTrainSet, int pN) {
 		Iterator<DistIndex> it = this.getIterator();
 		DistIndex di = null;
 		ListEvaluation le = new ListEvaluation();

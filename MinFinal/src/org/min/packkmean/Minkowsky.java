@@ -28,7 +28,7 @@ private int k,n,m;
 	 * @return Vector with the results of the classifier.
 	 */
 	
-	public Vector<String> calculate(Vector<String> pTrain,Vector<String> pTestUnclass) {
+	public Vector<String> calculate(ListaEntidades pTrain,ListaEntidades pTestUnclass) {
 		Vector<String> result= new Vector<String>();
 		ListDistIndex indexedDist = new ListDistIndex();
 		DistIndex couple = null;
@@ -38,7 +38,7 @@ private int k,n,m;
 				double acum = 0;
 				for(int l=0;l<this.getN();l++) {
 					//Aqui se acumula las sumas
-					acum = acum + Math.pow(Math.abs(pTestUnclass. - pTrain.),this.getM()); /*TODO Transformar instance a String*/
+					acum = acum + Math.pow(Math.abs(Integer.parseInt(pTestUnclass.entidad(i).atributo(i)) - Integer.parseInt(pTrain.entidad(j).atributo(j))),this.getM());
 				}
 				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 				float root = this.getM();
@@ -58,7 +58,7 @@ private int k,n,m;
 		return result;
 	}
 	
-	private String clasify(ListDistIndex pNeighbours, Vector<String> pTrainSet) {
+	private String clasify(ListDistIndex pNeighbours, ListaEntidades pTrainSet) {
 		ListEvaluation lClas = pNeighbours.sign(pTrainSet, this.getN());
 		return lClas.topVoted();
 	}
