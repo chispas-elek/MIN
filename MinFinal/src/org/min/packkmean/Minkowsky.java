@@ -38,7 +38,7 @@ private int k,n,m;
 				double acum = 0;
 				for(int l=0;l<this.getN();l++) {
 					//Aqui se acumula las sumas
-					acum = acum + Math.pow(Math.abs(Integer.parseInt(pTestUnclass.entidad(i).atributo(i)) - Integer.parseInt(pTrain.entidad(j).atributo(j))),this.getM());
+					acum = acum + Math.pow(Math.abs(Double.parseDouble(pTestUnclass.entidad(i).atributo(i)) - Double.parseDouble(pTrain.entidad(j).atributo(j))),this.getM());
 				}
 				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 				float root = this.getM();
