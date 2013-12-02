@@ -3,8 +3,12 @@ package org.min.packkmean;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		//Cargamos el fichero Properties
+		LoadProperties loadP = new LoadProperties(args[0]);
+		loadP.load();
+		
+		//Cargamos los datos del fichero .arff
+		LoadData loadD = new LoadData(loadP.getData());
 	}
 
 }
