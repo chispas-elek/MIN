@@ -3,8 +3,6 @@ package org.min.packkmean;
 import java.util.Iterator;
 import java.util.Vector;
 
-import weka.core.Instances;
-
 public class ListDistIndex {
 	
 	private Vector<DistIndex> lDistances;
@@ -135,7 +133,7 @@ public class ListDistIndex {
 		ListEvaluation le = new ListEvaluation();
 		while(it.hasNext()) {
 			di = it.next();
-			Evaluation ev = new Evaluation(pTrainSet.instance(di.getPosition()).stringValue(pN).toString());
+			Evaluation ev = new Evaluation(pTrainSet.toString()); /*TODO Transformar de instancia a String*/
 			le.vote(ev);
 		}
 		return le;

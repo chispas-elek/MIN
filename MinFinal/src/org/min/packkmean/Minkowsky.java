@@ -33,12 +33,12 @@ private int k,n,m;
 		ListDistIndex indexedDist = new ListDistIndex();
 		DistIndex couple = null;
 		double distance = 0;
-		for(int i=0;i<pTestUnclass.numInstances();i++) {
-			for(int j=0;j<pTrain.numInstances();j++) {
+		for(int i=0;i<pTestUnclass.size();i++) {
+			for(int j=0;j<pTrain.size();j++) {
 				double acum = 0;
 				for(int l=0;l<this.getN();l++) {
 					//Aqui se acumula las sumas
-					acum = acum + Math.pow(Math.abs(pTestUnclass.instance(i).value(l) - pTrain.instance(j).value(l)),this.getM());
+					acum = acum + Math.pow(Math.abs(pTestUnclass. - pTrain.),this.getM()); /*TODO Transformar instance a String*/
 				}
 				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 				float root = this.getM();
@@ -58,7 +58,7 @@ private int k,n,m;
 		return result;
 	}
 	
-	private String clasify(ListDistIndex pNeighbours, Instances pTrainSet) {
+	private String clasify(ListDistIndex pNeighbours, Vector<String> pTrainSet) {
 		ListEvaluation lClas = pNeighbours.sign(pTrainSet, this.getN());
 		return lClas.topVoted();
 	}
