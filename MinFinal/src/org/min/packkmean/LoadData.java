@@ -22,7 +22,7 @@ public class LoadData {
 	 * @return Devuelve un Vector de Strings con las instancias de la clase.
 	 */
 	
-	public ListaEntidades CargarDatos() {
+	public ListaEntidades CargarDatos(String pK) {
 		
 		ListaEntidades lista = new ListaEntidades();
 		File fichero = new File(this.getPath());
@@ -47,7 +47,7 @@ public class LoadData {
 				}else {
 					while(entrada.ready()){
 						linea=entrada.readLine();
-						ent1 = new Entidad(linea);
+						ent1 = new Entidad(linea, Integer.parseInt(pK));
 						lista.anadir(ent1);
 					}
 					entrada.close();
