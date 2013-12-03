@@ -22,7 +22,7 @@ public class SaveData {
 	 * @param pPrediction
 	 */
 	
-	public static void escribirResultadosEvaluador(String pNombreFichero,Vector pTest,double[] pPrediction){
+	public static void escribirResultadosEvaluador(String pNombreFichero,Vector<String> pTest,double[] pPrediction){
 		File fichero = new File(pNombreFichero);
 		if(!fichero.exists()) {
 			//No existen duplicados
@@ -31,8 +31,8 @@ public class SaveData {
 				for(int i=0;i<pPrediction.length;i++){
 					// Escribir la clase real que aparece en el conjunto de test y la clase estimada
 					double prediction = pPrediction[i];
-					bw.write(" REAL CLASS: " + pTest.classAttribute().value((int) pTest.instance(i).classValue()));
-					bw.write("Â  SYSTEM PREDICTED CLASS: " + pTest.classAttribute().value((int) prediction));
+					//bw.write(" REAL CLASS: " + pTest.classAttribute().value((int) pTest.instance(i).classValue()));
+					bw.write("Â  SYSTEM PREDICTED CLASS: " + pTest.elementAt(i));
 					bw.newLine();
 				}
 				bw.close();
