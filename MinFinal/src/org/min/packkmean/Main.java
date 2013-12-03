@@ -9,7 +9,7 @@ public class Main {
 		
 		//Cargamos los datos del fichero .arff
 		LoadData loadD = new LoadData(loadP.getData());
-		ListaEntidades lista = loadD.CargarDatos();
+		ListaEntidades lista = loadD.CargarDatos(loadP.getK());
 		
 		//Llamamos a k-means
 	}
