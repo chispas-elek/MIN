@@ -9,8 +9,10 @@ public class LoadProperties {
 	
 	/** The number of neighbours */
 	private String k;
-	/** Number of the attributes to use in Minkowsky */
+	/** Number of the initialize decision */
 	private String n;
+	/** Number of user convergence criteria */
+	private String c;
 	/** Number to use in the Minkowsky algoritmh */
 	private String m;
 	/** The system path that contains the .arff file */
@@ -37,6 +39,7 @@ public class LoadProperties {
 			
 			this.setK(prop.getProperty("k"));
 			this.setN(prop.getProperty("n"));
+			this.setC(prop.getProperty("c"));
 			this.setM(prop.getProperty("m"));
 			this.setData(prop.getProperty("data"));
 		}catch (FileNotFoundException e) {
@@ -63,15 +66,13 @@ public class LoadProperties {
 		this.k = k;
 	}
 	/**
-	 * Gets the number of attributes.
-	 * 
-	 * @return the number of attributes.
+	 * Gets the number of initialize decision
 	 */
 	public String getN() {
 		return n;
 	}
 	/**
-	 * Sets the number of attributes
+	 * Sets the number of initialize decision
 	 * 
 	 * @param n number of attributes.
 	 */
@@ -118,5 +119,23 @@ public class LoadProperties {
 	 */
 	public String getPath() {
 		return path;
+	}
+	
+	/**
+	 * Gets the number of convergence criteria
+	 * @return
+	 */
+	
+	public String getC() {
+		return this.c;
+	}
+	
+	/**
+	 * Sets the number of convergence criteria
+	 * @param c Numer of convergence criteria.
+	 */
+	
+	private void setC(String c ) {
+		this.c = c;
 	}
 }
