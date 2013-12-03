@@ -1,5 +1,6 @@
 package org.min.packkmean;
 
+import java.util.Iterator;
 import java.util.Vector;
 
 public class ListaEntidades {
@@ -20,5 +21,18 @@ public class ListaEntidades {
 	
 	public int size() {
 		return lEntidades.size();
+	}
+	
+	public ListaEntidades buscarPorCluster(int i) {
+		ListaEntidades le = new ListaEntidades();
+		Entidad e = null;
+		Iterator<Entidad> it = this.lEntidades.iterator();
+		while(it.hasNext()) {
+			e = it.next();
+			if(e.esDeCluster(i)) {
+				le.anadir(e);
+			}
+		}
+		return le;
 	}
 }

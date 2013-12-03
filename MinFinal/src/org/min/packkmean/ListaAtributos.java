@@ -18,5 +18,9 @@ public class ListaAtributos {
 	public String atributo(int i) {
 		return lAtributos.elementAt(i);
 	}
+	
+	public int size() {
+		return this.lAtributos.size();
+	}
 
 }
