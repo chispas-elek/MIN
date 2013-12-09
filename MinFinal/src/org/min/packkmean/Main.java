@@ -40,7 +40,7 @@ public class Main {
 								System.out.println("Inserte el numero de ciclos");
 								Scanner read = new Scanner(System.in);
 								int pRead = sc.nextInt();
-								Kmeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead);
+								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead);
 								break;
 							case 2: 
 								
