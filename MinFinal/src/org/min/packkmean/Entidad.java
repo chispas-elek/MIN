@@ -11,17 +11,25 @@ public class Entidad {
 		mPertenencia = new int[k];
 	}
 	
+	public Entidad() {
+		atributos = new ListaAtributos();
+	}
+	
 	private void buscarAtributos(String pString) {
 		int j = 0;
 		for(int i = 0; i < pString.length(); i++) {
 			if(pString.charAt(i) == ',') {
-				atributos.anadir(pString.substring(j, i-1));
+				atributos.anadir(Double.parseDouble(pString.substring(j, i-1)));
 				j = i+1;
 			}
 		}
 	}
 	
-	public String atributo(int i){
+	public void anadir(double pString) {
+		this.atributos.anadir(pString);
+	}
+	
+	public double atributo(int i){
 		return atributos.atributo(i);
 	}
 	

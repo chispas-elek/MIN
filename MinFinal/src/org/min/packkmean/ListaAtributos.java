@@ -4,18 +4,18 @@ import java.util.Vector;
 
 public class ListaAtributos {
 	
-	private Vector<String> lAtributos;
+	private Vector<Double> lAtributos;
 	
 	
 	public ListaAtributos() {
-		lAtributos = new Vector<String>();
+		lAtributos = new Vector<Double>();
 	}
 	
-	public void anadir(String pString) {
+	public void anadir(double pString) {
 		lAtributos.add(pString);
 	}
 	
-	public String atributo(int i) {
+	public double atributo(int i) {
 		return lAtributos.elementAt(i);
 	}
 	

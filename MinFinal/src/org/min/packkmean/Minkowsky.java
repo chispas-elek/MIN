@@ -34,7 +34,7 @@ private ListaEntidades centroides;
 			double acum = 0;
 			for(int l=0;l < pEntidad.size();l++) {
 				//Aqui se acumula las sumas
-					acum = acum + Math.pow(Math.abs(Double.parseDouble(pEntidad.atributo(l)) - Double.parseDouble(this.centroides.entidad(i).atributo(l))),this.getM());
+					acum = acum + Math.pow(Math.abs(pEntidad.atributo(l) - this.centroides.entidad(i).atributo(l)),this.getM());
 				}
 				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 				float root = this.getM();

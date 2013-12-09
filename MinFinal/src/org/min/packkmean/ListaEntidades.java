@@ -49,7 +49,21 @@ public class ListaEntidades {
 	}
 	
 	public Entidad recalcularCentroide() {
-		return null;
+		Entidad nuevo = new Entidad();
+		Iterator<Entidad> it = this.getIterador();
+		Entidad ent = null;
+		double adder = 0;
+		int i = this.lEntidades.elementAt(0).size();
+		for(int j = 0; j < i; j++) {
+			while(it.hasNext()) {
+				ent = it.next();
+				adder = adder + ent.atributo(j);
+			}
+			it = this.getIterador();
+			nuevo.anadir(adder);
+			adder = 0;
+		}	
+		return nuevo;
 	}
 	
 	public Iterator<Entidad> getIterador() {
