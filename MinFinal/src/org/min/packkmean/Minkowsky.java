@@ -53,5 +53,13 @@ private ListaEntidades centroides;
 	private int getM() {
 		return m;
 	}
+	
+	private void setCentroides(ListaEntidades pListaEntidades) {
+		this.centroides = pListaEntidades;
+	}
+	
+	public void actualizarCentroides(ListaEntidades pListaEntidades) {
+		this.setCentroides(pListaEntidades);
+	}
 
 }
