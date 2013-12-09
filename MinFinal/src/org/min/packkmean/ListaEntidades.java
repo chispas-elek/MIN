@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class ListaEntidades {
 
-	Vector<Entidad> lEntidades;
+	private Vector<Entidad> lEntidades;
 	
 	public ListaEntidades() {
 		lEntidades = new Vector<Entidad>();
