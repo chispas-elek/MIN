@@ -1,7 +1,5 @@
 package org.min.packkmean;
 
-import java.util.Random;
-import java.util.Vector;
 
 public class Minkowsky {
 private int m;
