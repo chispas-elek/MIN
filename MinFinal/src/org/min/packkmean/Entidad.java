@@ -48,5 +48,18 @@ public class Entidad {
 	public void cluster(int i) {
 		this.mPertenencia[i] = 1;
 	}
+	
+	//Distancia euclidea
+	public double calcularUmbral(Entidad pEntidad) {
+		double result = 0;
+		double acum = 0;
+		for(int l=0;l < pEntidad.size();l++) {
+				//Aqui se acumula las sumas
+				acum = acum + Math.pow(Math.abs(pEntidad.atributo(l) - this.atributo(l)), 2);
+			}
+			float root = 2;
+			result = Math.pow(acum, 1.0/root);
+		return result;
+	}
 
 }

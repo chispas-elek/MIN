@@ -69,4 +69,5 @@ public class ListaEntidades {
 	public Iterator<Entidad> getIterador() {
 		return this.lEntidades.iterator();
 	}
+	
 }
