@@ -24,8 +24,13 @@ public class Entidad {
 		int j = 0;
 		for(int i = 0; i < pString.length(); i++) {
 			if(pString.charAt(i) == ',') {
-				atributos.anadir(Double.parseDouble(pString.substring(j, i-1)));
-				j = i+1;
+				try {
+					atributos.anadir(Double.parseDouble(pString.substring(j, i-1)));
+					j = i+1;
+				}catch (NumberFormatException e) {
+					System.out.println("Ésto era la clase");
+					j = i+1;
+				}
 			}
 		}
 	}
