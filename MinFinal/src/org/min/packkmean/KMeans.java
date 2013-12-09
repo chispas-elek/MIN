@@ -38,9 +38,9 @@ public class KMeans {
 		}else {
 			//Repetición por n veces
 			for(int i = 0;i<this.getCiclos();i++) {
-				Iterator<E> it = this.pListaEntidades.
+				Iterator<Entidad> it = this.pListaEntidades.getIterador();
 				while(it.hasNext()) {
-					ent1 = 
+					ent1 = it.next();
 				}
 			}
 		}
