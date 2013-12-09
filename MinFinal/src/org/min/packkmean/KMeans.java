@@ -1,5 +1,7 @@
 package org.min.packkmean;
 
+import java.util.Iterator;
+
 public class KMeans {
 	
 	private Minkowsky pMinkowsky;
@@ -28,7 +30,31 @@ public class KMeans {
 	 */
 	
 	public void recycle() {
-		//Escogemos el modelo dependiento si se han especificado o no ciclos.
-		
+		Entidad ent1;
+		if (this.getCiclos() == 0) {
+			//Repetición por umbral. Especificar valor de umbral.
+			double umbral = 0.35;
+			
+		}else {
+			//Repetición por n veces
+			for(int i = 0;i<this.getCiclos();i++) {
+				Iterator<E> it = this.pListaEntidades.
+				while(it.hasNext()) {
+					ent1 = 
+				}
+			}
+		}
+	}
+	
+	private int getCiclos() {
+		return this.ciclos;
+	}
+	
+	private Minkowsky getMinkowsky() {
+		return this.pMinkowsky;
+	}
+	
+	private ListaEntidades getListaEntidades() {
+		return this.pListaEntidades;
 	}
 }
