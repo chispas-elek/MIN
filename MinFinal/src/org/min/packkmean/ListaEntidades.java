@@ -47,4 +47,12 @@ public class ListaEntidades {
 		}
 		return pLista;
 	}
+	
+	public Entidad recalcularCentroide() {
+		return null;
+	}
+	
+	public Iterator<Entidad> getIterador() {
+		return this.lEntidades.iterator();
+	}
 }
