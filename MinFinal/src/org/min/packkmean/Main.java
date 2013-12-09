@@ -32,14 +32,14 @@ public class Main {
 						System.out.println("1.-Definido");
 						System.out.println("2.-Automatico");
 						System.out.println("===================================");
-						Scanner read2 = new Scanner(System.in);
-						int pRead2 = sc.nextInt();
-						switch (pRead2){
+						Scanner read = new Scanner(System.in);
+						int pRead = read.nextInt();
+						switch (pRead){
 							case 1: 
 								System.out.println("Inserte el numero de ciclos");
-								Scanner read = new Scanner(System.in);
-								int pRead = sc.nextInt();
-								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead);
+								Scanner read2 = new Scanner(System.in);
+								int pRead2 = read2.nextInt();
+								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead2);
 								pKMeans.recycle();
 								break;
 							case 2: 
@@ -51,6 +51,7 @@ public class Main {
 								break;
 								
 						}
+						read.close();
 					}
 					break;
 	
@@ -68,8 +69,8 @@ public class Main {
 							case 1: 
 								menu2b = true;
 								System.out.println("Inserte el numero de ciclos");
-								Scanner read = new Scanner(System.in);
-								int pRead = sc.nextInt();
+								Scanner read4 = new Scanner(System.in);
+								int pRead4 = read4.nextInt();
 								
 								break;
 							case 2:
@@ -79,7 +80,7 @@ public class Main {
 								System.out.println("Opcion no valida.");
 								break;
 						}
-					
+						read3.close();
 					}
 					break;
 					
@@ -88,8 +89,8 @@ public class Main {
 					break;
 					
 			}
+			sc.close();
 		}
-		ListaEntidades random = lista.randomSelect(Integer.parseInt(loadP.getK()));
-		KMeans pKMeans = new KMeans(lista, loadP.getM(), random);
 	}
+	
 }
