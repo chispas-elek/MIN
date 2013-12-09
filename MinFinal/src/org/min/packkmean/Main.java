@@ -31,7 +31,6 @@ public class Main {
 						System.out.println("Determine la iterabilidad");
 						System.out.println("1.-Definido");
 						System.out.println("2.-Automatico");
-						System.out.println("3.-Volver");
 						System.out.println("===================================");
 						Scanner read2 = new Scanner(System.in);
 						int pRead2 = sc.nextInt();
@@ -41,15 +40,15 @@ public class Main {
 								Scanner read = new Scanner(System.in);
 								int pRead = sc.nextInt();
 								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead);
+								pKMeans.recycle();
 								break;
 							case 2: 
-								
-								break;
-							case 3:
-								
+								KMeans pKMeans2 = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())));
+								pKMeans2.recycle();
 								break;
 							default: 
 								System.out.println("Opcion no valida.");
+								break;
 								
 						}
 					}
@@ -79,14 +78,14 @@ public class Main {
 							default: 
 								System.out.println("Opcion no valida.");
 								break;
-					}
+						}
 					
 					}
 					break;
 					
 				default: 
 					System.out.println("Opcion no valida.");
-					
+					break;
 					
 			}
 		}
