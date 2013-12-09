@@ -32,6 +32,21 @@ public class KMeans {
 		this.k=pRandom.size();
 	}
 	
+	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos, boolean pControl) {
+		this.pListaEntidades = pListaEnt;
+		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.ciclos = pCiclos;
+		this.k=k;
+	}
+	
+	public KMeans(ListaEntidades pListaEnt, String m, int k, boolean pControl) {
+		this.pListaEntidades = pListaEnt;
+		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.k=k;
+	}
+	
+	
+	
 	/**
 	 * Se encarga de calcular iterativamente la pertenencia y recalcula el centroide de cada cluster.
 	 */
@@ -115,5 +130,27 @@ public class KMeans {
 	
 	private double getUmbral(){
 		return this.getUmbral();
+	}
+	
+	private ListaEntidades calcularCentroidesIniciales(int k) {
+		Iterator<Entidad> it = this.pListaEntidades.getIterador();
+		Entidad ent = null;
+		double dist = 0;
+		while(it.hasNext()) {
+			ent = it.next();
+			if(ent.atributo(0) > dist) {
+				dist = ent.atributo(0);
+			}
+		}
+		dist = dist / k;
+		double p = 0;
+		ListaEntidades centroides = new ListaEntidades();
+		for(int i = 0; i < k; i++) {
+			ent = new Entidad(k);
+			ent.anadir(p + dist);
+			p = p +dist;
+			centroides.anadir(ent);
+		}
+		return centroides;
 	}
 }

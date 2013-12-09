@@ -15,6 +15,11 @@ public class Entidad {
 		atributos = new ListaAtributos();
 	}
 	
+	public Entidad(int k) {
+		atributos = new ListaAtributos();
+		mPertenencia = new int[k];
+	}
+	
 	private void buscarAtributos(String pString) {
 		int j = 0;
 		for(int i = 0; i < pString.length(); i++) {
