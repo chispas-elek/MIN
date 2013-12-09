@@ -1,6 +1,7 @@
 package org.min.packkmean;
 
 import java.util.Iterator;
+import java.util.Random;
 import java.util.Vector;
 
 public class ListaEntidades {
@@ -34,5 +35,16 @@ public class ListaEntidades {
 			}
 		}
 		return le;
+	}
+	
+	public ListaEntidades randomSelect(int k) {
+		ListaEntidades pLista = new ListaEntidades();
+		Random rnd = new Random(this.size());
+		int i;
+		for(int j = 0; j < k; j++) {
+			i = rnd.nextInt();
+			pLista.anadir(this.entidad(i));
+		}
+		return pLista;
 	}
 }

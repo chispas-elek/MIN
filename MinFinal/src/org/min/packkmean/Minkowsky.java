@@ -15,9 +15,9 @@ private ListaEntidades centroides;
 	 * @param pN the value of the number of parameters in the data set.
 	 * @param pM the value to use Minkownsky algorithm.
 	 */
-	public Minkowsky(int pM, ListaEntidades pEntidades) {
+	public Minkowsky(int pM, ListaEntidades pLista) {
 		this.m = pM;
-		this.centroides = pEntidades;
+		this.centroides = pLista;
 	}
 	
 	/**
