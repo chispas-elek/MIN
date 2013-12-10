@@ -120,16 +120,16 @@ public class KMeans {
 		return this.pMinkowsky;
 	}
 	
-	private ListaEntidades getListaEntidades() {
-		return this.pListaEntidades;
-	}
+	//private ListaEntidades getListaEntidades() {
+	//	return this.pListaEntidades;
+	//}
 	
 	private int getK() {
 		return this.k;
 	}
 	
 	private double getUmbral(){
-		return this.getUmbral();
+		return this.umbral;
 	}
 	
 	private ListaEntidades calcularCentroidesIniciales(int k) {

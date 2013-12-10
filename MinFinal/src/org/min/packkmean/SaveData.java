@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class SaveData {
@@ -22,7 +23,7 @@ public class SaveData {
 	 * @param pPrediction
 	 */
 	
-	public static void escribirResultadosEvaluador(String pNombreFichero,Vector<String> pTest,double[] pPrediction){
+	public static void escribirResultadosEvaluador(String pNombreFichero, double[] pPrediction){
 		File fichero = new File(pNombreFichero);
 		if(!fichero.exists()) {
 			//No existen duplicados
@@ -42,6 +43,11 @@ public class SaveData {
 			}
 		}else {
 			System.out.println("El fichero de Resultados ya existe. Por favor elimina primero dicho fichero");
+			System.out.println("Por favor, borra el fichero y pulse enter");
+			Scanner sc = new Scanner(System.in);
+			sc.next();
+			sc.close();
+			SaveData.escribirResultadosEvaluador(pNombreFichero, pPrediction);
 		}
 	}
 	
