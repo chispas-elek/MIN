@@ -32,19 +32,18 @@ private ListaEntidades centroides;
 			double acum = 0;
 			for(int l=0;l < pEntidad.size();l++) {
 				//Aqui se acumula las sumas
-					acum = acum + Math.pow(Math.abs(pEntidad.atributo(l) - this.centroides.entidad(i).atributo(l)),this.getM());
-				}
-				//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
-				float root = this.getM();
-				result = Math.pow(acum, 1.0/root);
-				if(distance == 0) {
-					distance = result;
-				}
-				if(distance >= result) {
-					distance = result;
-					pEntidad.cluster(i);
-					
-				}
+				acum = acum + Math.pow(Math.abs(pEntidad.atributo(l) - this.centroides.entidad(i).atributo(l)),this.getM());
+			}
+			//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
+			float root = this.getM();
+			result = Math.pow(acum, 1.0/root);
+			if(distance == 0) {
+				distance = result;
+			}
+			if(distance >= result) {
+				distance = result;
+				pEntidad.cluster(i);
+			}
 		}
 	}
 
