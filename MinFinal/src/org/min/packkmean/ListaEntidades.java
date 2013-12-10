@@ -20,6 +20,22 @@ public class ListaEntidades {
 		return lEntidades.elementAt(i);
 	}
 	
+	public Entidad buscarSiExiste(Entidad pEntidad) {
+		Iterator<Entidad> it = this.getIterador();
+		Entidad ent1 = null;
+		boolean found = false;
+		while(it.hasNext() && !found) {
+			ent1 = it.next();
+			if(ent1 == pEntidad) {
+				found = true;
+			}
+		}
+		if(!found) {
+			ent1 = null;
+		}
+		return ent1;
+	}
+	
 	public int size() {
 		return lEntidades.size();
 	}
@@ -39,11 +55,15 @@ public class ListaEntidades {
 	
 	public ListaEntidades randomSelect(int k) {
 		ListaEntidades pLista = new ListaEntidades();
-		Random rnd = new Random(this.size());
+		Random rnd = new Random();
 		int i;
-		for(int j = 0; j < k; j++) {
-			i = rnd.nextInt();
-			pLista.anadir(this.entidad(i));
+		int j = 0;
+		while(j < k) {
+			i = rnd.nextInt(this.size());
+			if(pLista.buscarSiExiste(this.entidad(i)) == null) {
+				pLista.anadir(this.entidad(i));
+				j++;
+			}
 		}
 		return pLista;
 	}

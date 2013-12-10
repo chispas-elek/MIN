@@ -26,9 +26,14 @@ public class Entidad {
 	private void buscarAtributos(String pString) {
 		int j = 0;
 		for(int i = 0; i < pString.length(); i++) {
-			if(pString.charAt(i) == ',') {
+			if(pString.charAt(i) == ',' || i+1 == pString.length()) {
 				try {
-					atributos.anadir(Double.parseDouble(pString.substring(j, i-1)));
+					//Corremos un valor.
+					if(i+1 == pString.length()) {
+						i++;
+					}
+					String comprobar = pString.substring(j, i);
+					atributos.anadir(Double.parseDouble(comprobar));
 					j = i+1;
 				}catch (NumberFormatException e) {
 					System.out.println("Ésto era la clase");

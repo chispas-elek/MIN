@@ -11,7 +11,7 @@ public class Main {
 		
 		//Cargamos los datos del fichero .arff
 		LoadData loadD = new LoadData(loadP.getData());
-		ListaEntidades lista = loadD.CargarDatos(loadP.getK());
+		ListaEntidades lista = loadD.CargarDatos(Integer.parseInt(loadP.getK()));
 		
 		//Llamamos a k-means
 		boolean menu1 = false;
@@ -35,13 +35,15 @@ public class Main {
 						int pRead = read.nextInt();
 						switch (pRead){
 							case 1: 
+								menu2a = true;
 								System.out.println("Inserte el numero de ciclos");
 								Scanner read2 = new Scanner(System.in);
 								int pRead2 = read2.nextInt();
 								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead2);
 								pKMeans.recycle();
 								break;
-							case 2: 
+							case 2:
+								menu2a = true;
 								KMeans pKMeans2 = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())));
 								pKMeans2.recycle();
 								break;
