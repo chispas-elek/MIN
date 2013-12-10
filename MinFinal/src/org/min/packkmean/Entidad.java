@@ -1,5 +1,8 @@
 package org.min.packkmean;
 
+import java.util.Random;
+import java.util.Vector;
+
 public class Entidad {
 	
 	private ListaAtributos atributos;
@@ -73,8 +76,17 @@ public class Entidad {
 	}
 	
 	public int cluster() {
-		int k = 0;
-		
+		Vector<Integer> result = new Vector<Integer>();
+		for(int i = 0; i < this.mPertenencia.length; i++) {
+			if(this.mPertenencia[i] == 1) {
+				result.add(this.mPertenencia[i]);
+			}
+			i++;
+		}
+		Random rnd = new Random(result.size());
+		int m = rnd.nextInt();
+		int k = result.elementAt(m);
+		return k;
 	}
 
 }
