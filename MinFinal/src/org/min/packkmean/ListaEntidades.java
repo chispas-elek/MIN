@@ -70,4 +70,17 @@ public class ListaEntidades {
 		return this.lEntidades.iterator();
 	}
 	
+	public int[] clusters() {
+		int[] result = new int[this.size()];
+		Iterator<Entidad> it = this.getIterador();
+		Entidad ent = null;
+		int i = 0;
+		while(it.hasNext()) {
+			ent = it.next();
+			result[i] = ent.cluster();
+			i++;
+		}
+		return result;
+	}
+	
 }

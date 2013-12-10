@@ -71,5 +71,10 @@ public class Entidad {
 			result = Math.pow(acum, 1.0/root);
 		return result;
 	}
+	
+	public int cluster() {
+		int k = 0;
+		
+	}
 
 }
