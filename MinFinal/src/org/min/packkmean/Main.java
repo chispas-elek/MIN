@@ -93,6 +93,9 @@ public class Main {
 			}
 			sc.close();
 		}
+		
+		//Escribimos los resultados obtenidos en un fichero en el disco duro.
+		SaveData.escribirResultadosEvaluador("Resultados.txt", lista);
 	}
 	
 }
