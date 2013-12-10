@@ -1,6 +1,5 @@
 package org.min.packkmean;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -71,10 +70,13 @@ public class Main {
 								System.out.println("Inserte el numero de ciclos");
 								Scanner read4 = new Scanner(System.in);
 								int pRead4 = read4.nextInt();
-								
+								KMeans pKMeans3 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()), pRead4);
+								pKMeans3.recycle();
 								break;
 							case 2:
 								menu2b = true;
+								KMeans pKMeans4 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()));
+								pKMeans4.recycle();
 								break;
 							default: 
 								System.out.println("Opcion no valida.");
