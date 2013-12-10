@@ -32,14 +32,14 @@ public class KMeans {
 		this.k=pRandom.size();
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos, boolean pControl) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
 		this.ciclos = pCiclos;
 		this.k=k;
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k, boolean pControl) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
 		this.k=k;
