@@ -1,5 +1,8 @@
 package org.min.packkmean;
 
+import java.util.Iterator;
+import java.util.Vector;
+
 
 public class Minkowsky {
 private int m;
@@ -26,8 +29,7 @@ private ListaEntidades centroides;
 	 */
 	
 	public void calculate(Entidad pEntidad) {
-		double distance = 0;
-		double result = 0;
+		Vector<Double> distancias = new Vector<Double>();
 		for(int i=0;i<centroides.size();i++) {
 			double acum = 0;
 			for(int l=0;l < pEntidad.size();l++) {
@@ -36,14 +38,33 @@ private ListaEntidades centroides;
 			}
 			//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 			float root = this.getM();
-			result = Math.pow(acum, 1.0/root);
-			if(distance == 0) {
-				distance = result;
+			double result = Math.pow(acum, 1.0/root);
+			distancias.add(result);
+		}
+		this.asignarElCluster(distancias, pEntidad);
+	}
+	
+	private void asignarElCluster(Vector<Double> pDistancias, Entidad pEntidad) {
+		pEntidad.reiniciar();
+		Iterator<Double> it = pDistancias.iterator();
+		double minimo = 0;
+		double tester = 0;
+		int contador = 0;
+		//Calculamos la distancia minima
+		while(it.hasNext()) {
+			tester = it.next();
+			if(minimo == 0 || tester < minimo) {
+				minimo = tester;
 			}
-			if(distance >= result) {
-				distance = result;
-				pEntidad.cluster(i);
+		}
+		//Comprobamos cual(es) de las distancias hay que coger
+		it = pDistancias.iterator();
+		while(it.hasNext()) {
+			tester = it.next();
+			if(tester == minimo) {
+				pEntidad.asignarCluster(contador);
 			}
+			contador++;
 		}
 	}
 

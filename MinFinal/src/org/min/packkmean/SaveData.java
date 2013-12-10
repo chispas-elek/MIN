@@ -4,7 +4,9 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class SaveData {
 
@@ -29,10 +31,11 @@ public class SaveData {
 			try{
 				BufferedWriter bw = new BufferedWriter(new FileWriter(pNombreFichero));
 				//obtenemos los resultados de la lista de entidades
-				int[] predicctions = result.clusters();
-				for(int i=0;i<predicctions.length;i++) {
+				Vector<Integer> predicctions = result.clusters();
+				Iterator<Integer> it = predicctions.iterator();
+				while(it.hasNext()){
 					// Escribir los resultados en el fichero.
-					int clasificado = predicctions[i];
+					int clasificado = it.next();
 					bw.write("Clase estimada " + clasificado);
 					bw.newLine();
 				}

@@ -22,12 +22,14 @@ public class KMeans {
 	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
+		this.actualizarEntidades();
 		this.k=pRandom.size();
 	}
 	
 	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
+		this.actualizarEntidades();
 		this.ciclos = pCiclos;
 		this.k=pRandom.size();
 	}
@@ -35,6 +37,7 @@ public class KMeans {
 	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.actualizarEntidades();
 		this.ciclos = pCiclos;
 		this.k=k;
 	}
@@ -42,6 +45,7 @@ public class KMeans {
 	public KMeans(ListaEntidades pListaEnt, String m, int k) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.actualizarEntidades();
 		this.k=k;
 	}
 	
@@ -96,13 +100,7 @@ public class KMeans {
 	 * Se encarga de recalcular el centroide e insertarlo en la clase Minkowsky.
 	 */
 	private void recalcularCentroide() {
-		Entidad ent1;
-		ListaEntidades nuevaListaCentroide = new ListaEntidades();		
-		Iterator<Entidad> it = this.pListaEntidades.getIterador();
-		while(it.hasNext()) {
-			ent1 = it.next();
-			this.getMinkowsky().calculate(ent1);
-		}
+		ListaEntidades nuevaListaCentroide = new ListaEntidades();
 		//Hemos clasificado las instancias ahora recalculamos el centroide.
 		for(int z=0;z<this.getK();z++) {
 			ListaEntidades le = this.pListaEntidades.buscarPorCluster(z);
@@ -110,6 +108,9 @@ public class KMeans {
 		}
 		//Actualizamos los centroides en minkowsky.
 		this.getMinkowsky().actualizarCentroides(nuevaListaCentroide);
+		
+		//Actualizar el book
+		this.actualizarEntidades();
 	}
 	
 	private int getCiclos() {
@@ -130,6 +131,15 @@ public class KMeans {
 	
 	private double getUmbral(){
 		return this.umbral;
+	}
+	
+	private void actualizarEntidades() {
+		Entidad ent1;		
+		Iterator<Entidad> it = this.pListaEntidades.getIterador();
+		while(it.hasNext()) {
+			ent1 = it.next();
+			this.getMinkowsky().calculate(ent1);
+		}
 	}
 	
 	private ListaEntidades calcularCentroidesIniciales(int k) {

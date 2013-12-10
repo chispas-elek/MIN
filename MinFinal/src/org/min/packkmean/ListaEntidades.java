@@ -70,18 +70,21 @@ public class ListaEntidades {
 	
 	public Entidad recalcularCentroide() {
 		Entidad nuevo = new Entidad();
-		Iterator<Entidad> it = this.getIterador();
 		Entidad ent = null;
 		double adder = 0;
+		double media = 0;
 		int i = this.lEntidades.elementAt(0).size();
 		for(int j = 0; j < i; j++) {
+			Iterator<Entidad> it = this.getIterador();
 			while(it.hasNext()) {
 				ent = it.next();
-				adder = adder + ent.atributo(j);
+				adder = adder + ent.atributo(j);	
 			}
-			it = this.getIterador();
-			nuevo.anadir(adder);
+			System.out.println("Vale "+this.lEntidades.size());
+			media = adder / this.lEntidades.size();
+			nuevo.anadir(media);
 			adder = 0;
+			media = 0;
 		}	
 		return nuevo;
 	}
@@ -90,15 +93,13 @@ public class ListaEntidades {
 		return this.lEntidades.iterator();
 	}
 	
-	public int[] clusters() {
-		int[] result = new int[this.size()];
+	public Vector<Integer> clusters() {
+		Vector<Integer> result = new Vector<Integer>();
 		Iterator<Entidad> it = this.getIterador();
 		Entidad ent = null;
-		int i = 0;
 		while(it.hasNext()) {
 			ent = it.next();
-			result[i] = ent.cluster();
-			i++;
+			result.add(ent.cluster());
 		}
 		return result;
 	}

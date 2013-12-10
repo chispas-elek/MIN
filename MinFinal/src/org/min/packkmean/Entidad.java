@@ -63,7 +63,7 @@ public class Entidad {
 		return this.atributos.size();
 	}
 	
-	public void cluster(int i) {
+	public void asignarCluster(int i) {
 		this.mPertenencia[i] = 1;
 	}
 	
@@ -88,10 +88,18 @@ public class Entidad {
 			}
 			i++;
 		}
-		Random rnd = new Random(result.size());
-		int m = rnd.nextInt();
+		Random rnd = new Random();
+		int r = result.size();
+		int m = rnd.nextInt(r);
 		int k = result.elementAt(m);
 		return k;
+	}
+	
+	public void reiniciar() {
+		int i = mPertenencia.length;
+		for(int j = 0; j < i; j++) {
+			mPertenencia[j] = 0;
+		}
 	}
 
 }
