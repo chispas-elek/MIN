@@ -45,7 +45,7 @@ private ListaEntidades centroides;
 	}
 	
 	private void asignarElCluster(Vector<Double> pDistancias, Entidad pEntidad) {
-		pEntidad.reiniciar();
+		pEntidad.inicializar(pEntidad.numCentroides());
 		Iterator<Double> it = pDistancias.iterator();
 		double minimo = 0;
 		double tester = 0;

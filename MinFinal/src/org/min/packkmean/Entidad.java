@@ -1,17 +1,19 @@
 package org.min.packkmean;
 
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
 public class Entidad {
 	
 	private ListaAtributos atributos;
-	int[] mPertenencia;
+	private Vector<Integer> mPertenencia;
 	
 	public Entidad(String pString, int k) {
 		atributos = new ListaAtributos();
 		this.buscarAtributos(pString);
-		mPertenencia = new int[k];
+		mPertenencia = new Vector<Integer>(k);
+		this.inicializar(k);
 	}
 	
 	public Entidad() {
@@ -20,7 +22,8 @@ public class Entidad {
 	
 	public Entidad(int k) {
 		atributos = new ListaAtributos();
-		mPertenencia = new int[k];
+		mPertenencia = new Vector<Integer>(k);
+		this.inicializar(k);
 	}
 	
 	private void buscarAtributos(String pString) {
@@ -53,7 +56,7 @@ public class Entidad {
 	
 	public boolean esDeCluster(int i) {
 		boolean is = false;
-		if(this.mPertenencia[i] == 1) {
+		if(this.mPertenencia.elementAt(i) == 1) {
 			is = true;
 		}
 		return is;
@@ -64,7 +67,7 @@ public class Entidad {
 	}
 	
 	public void asignarCluster(int i) {
-		this.mPertenencia[i] = 1;
+		this.mPertenencia.setElementAt(1, i);
 	}
 	
 	//Distancia euclidea
@@ -81,25 +84,25 @@ public class Entidad {
 	}
 	
 	public int cluster() {
-		Vector<Integer> result = new Vector<Integer>();
-		for(int i = 0; i < this.mPertenencia.length; i++) {
-			if(this.mPertenencia[i] == 1) {
-				result.add(this.mPertenencia[i]);
-			}
-			i++;
-		}
 		Random rnd = new Random();
-		int r = result.size();
-		int m = rnd.nextInt(r);
-		int k = result.elementAt(m);
-		return k;
+		int r = this.mPertenencia.size();
+		int m = 0;
+		int k = 0;
+		while(k == 0) {
+			m = rnd.nextInt(r);
+			k = this.mPertenencia.elementAt(m);
+		}
+		return m;
 	}
 	
-	public void reiniciar() {
-		int i = mPertenencia.length;
-		for(int j = 0; j < i; j++) {
-			mPertenencia[j] = 0;
+	public void inicializar(int pK) {
+		this.mPertenencia.removeAllElements();
+		for(int i = 0; i < pK; i++) {
+			this.mPertenencia.add(0);
 		}
 	}
-
+	
+	public int numCentroides() {
+		return this.mPertenencia.size();
+	}
 }
