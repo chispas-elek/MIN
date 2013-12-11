@@ -19,33 +19,33 @@ public class KMeans {
 	 * @param m
 	 * @param pRandom
 	 */
-	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom) {
+	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, boolean pCond) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
-		this.actualizarEntidades();
+		this.actualizarEntidades(pCond);
 		this.k=pRandom.size();
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos) {
+	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos, boolean pCond) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
-		this.actualizarEntidades();
+		this.actualizarEntidades(pCond);
 		this.ciclos = pCiclos;
 		this.k=pRandom.size();
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos, boolean pCond) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
-		this.actualizarEntidades();
+		this.actualizarEntidades(pCond);
 		this.ciclos = pCiclos;
 		this.k=k;
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k, boolean pCond) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
-		this.actualizarEntidades();
+		this.actualizarEntidades(pCond);
 		this.k=k;
 	}
 	
@@ -55,7 +55,7 @@ public class KMeans {
 	 * Se encarga de calcular iterativamente la pertenencia y recalcula el centroide de cada cluster.
 	 */
 	
-	public void recycle() {
+	public void recycle(boolean pCond) {
 		if (this.getCiclos() == 0) {
 			//Repetición por umbral.
 			ListaEntidades viejoCentroide = new ListaEntidades();
@@ -110,7 +110,7 @@ public class KMeans {
 		this.getMinkowsky().actualizarCentroides(nuevaListaCentroide);
 		
 		//Actualizar el book
-		this.actualizarEntidades();
+		this.actualizarEntidades(false);
 	}
 	
 	private int getCiclos() {
@@ -133,12 +133,22 @@ public class KMeans {
 		return this.umbral;
 	}
 	
-	private void actualizarEntidades() {
-		Entidad ent1;		
-		Iterator<Entidad> it = this.pListaEntidades.getIterador();
-		while(it.hasNext()) {
-			ent1 = it.next();
-			this.getMinkowsky().calculate(ent1);
+	private void actualizarEntidades(boolean pCond) {
+		if(!pCond) {
+			Entidad ent1;		
+			Iterator<Entidad> it = this.pListaEntidades.getIterador();
+			while(it.hasNext()) {
+				ent1 = it.next();
+				this.getMinkowsky().calculate(ent1);
+			}
+		}
+		else {
+			Entidad ent1;		
+			Iterator<Entidad> it = this.pListaEntidades.getIterador();
+			while(it.hasNext()) {
+				ent1 = it.next();
+				this.getMinkowsky().calculatePorArea(ent1);
+			}	
 		}
 	}
 	
@@ -158,6 +168,10 @@ public class KMeans {
 		for(int i = 0; i < k; i++) {
 			ent = new Entidad(k);
 			ent.anadir(p + dist);
+			int l = this.pListaEntidades.entidad(0).size();
+			for(int x = 1; x < l; x++) {
+				ent.anadir(0);
+			}
 			p = p +dist;
 			centroides.anadir(ent);
 		}

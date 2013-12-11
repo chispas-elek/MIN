@@ -44,6 +44,21 @@ private ListaEntidades centroides;
 		this.asignarElCluster(distancias, pEntidad);
 	}
 	
+	public void calculatePorArea(Entidad pEntidad) {
+		int k = this.centroides.size();
+		for(int i = 0; i < k; i++) {
+			if(pEntidad.atributo(0) < this.centroides.entidad(i).atributo(0)) {
+				pEntidad.asignarCluster(i);
+			}
+			if(pEntidad.atributo(0) == this.centroides.entidad(i).atributo(0)) {
+				pEntidad.asignarCluster(i);
+				if(this.centroides.entidad(i) != this.centroides.entidad(k-1)) {
+					pEntidad.asignarCluster(i+1);
+				}
+			}
+		}
+	}
+	
 	private void asignarElCluster(Vector<Double> pDistancias, Entidad pEntidad) {
 		pEntidad.inicializar(pEntidad.numCentroides());
 		Iterator<Double> it = pDistancias.iterator();
@@ -67,6 +82,8 @@ private ListaEntidades centroides;
 			contador++;
 		}
 	}
+	
+	
 
 	private int getM() {
 		return m;

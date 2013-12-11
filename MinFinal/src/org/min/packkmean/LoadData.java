@@ -35,7 +35,7 @@ public class LoadData {
 				String linea;
 				while(entrada.ready() && !enc){
 					linea = entrada.readLine();
-					if(linea.equals("@data")){
+					if(linea.equals("@data") || linea.equals("@DATA")){
 						enc=true;
 					}      
 				}

@@ -1,6 +1,5 @@
 package org.min.packkmean;
 
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
 
