@@ -1,6 +1,7 @@
 package org.min.packkmean;
 
 import java.util.Iterator;
+import java.util.Random;
 
 public class KMeans {
 	
@@ -19,33 +20,31 @@ public class KMeans {
 	 * @param m
 	 * @param pRandom
 	 */
-	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, boolean pCond) {
+	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
-		this.actualizarEntidades(pCond);
+		this.actualizarEntidades();
 		this.k=pRandom.size();
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos, boolean pCond) {
+	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
-		this.actualizarEntidades(pCond);
+		this.actualizarEntidades();
 		this.ciclos = pCiclos;
 		this.k=pRandom.size();
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos, boolean pCond) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
-		this.actualizarEntidades(pCond);
 		this.ciclos = pCiclos;
 		this.k=k;
 	}
 	
-	public KMeans(ListaEntidades pListaEnt, String m, int k, boolean pCond) {
+	public KMeans(ListaEntidades pListaEnt, String m, int k) {
 		this.pListaEntidades = pListaEnt;
 		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
-		this.actualizarEntidades(pCond);
 		this.k=k;
 	}
 	
@@ -55,7 +54,7 @@ public class KMeans {
 	 * Se encarga de calcular iterativamente la pertenencia y recalcula el centroide de cada cluster.
 	 */
 	
-	public void recycle(boolean pCond) {
+	public void recycle() {
 		if (this.getCiclos() == 0) {
 			//Repetición por umbral.
 			ListaEntidades viejoCentroide = new ListaEntidades();
@@ -92,6 +91,7 @@ public class KMeans {
 			//Repetición por n veces
 			for(int i = 0;i<this.getCiclos();i++) {
 				this.recalcularCentroide();
+				this.actualizarEntidades();
 			}
 		}
 	}
@@ -108,9 +108,6 @@ public class KMeans {
 		}
 		//Actualizamos los centroides en minkowsky.
 		this.getMinkowsky().actualizarCentroides(nuevaListaCentroide);
-		
-		//Actualizar el book
-		this.actualizarEntidades(false);
 	}
 	
 	private int getCiclos() {
@@ -133,48 +130,31 @@ public class KMeans {
 		return this.umbral;
 	}
 	
-	private void actualizarEntidades(boolean pCond) {
-		if(!pCond) {
-			Entidad ent1;		
-			Iterator<Entidad> it = this.pListaEntidades.getIterador();
-			while(it.hasNext()) {
-				ent1 = it.next();
-				this.getMinkowsky().calculate(ent1);
-			}
-		}
-		else {
-			Entidad ent1;		
-			Iterator<Entidad> it = this.pListaEntidades.getIterador();
-			while(it.hasNext()) {
-				ent1 = it.next();
-				this.getMinkowsky().calculatePorArea(ent1);
-			}	
+	private void actualizarEntidades() {
+		Entidad ent1;		
+		Iterator<Entidad> it = this.pListaEntidades.getIterador();
+		while(it.hasNext()) {
+			ent1 = it.next();
+			this.getMinkowsky().calculate(ent1);
 		}
 	}
 	
 	private ListaEntidades calcularCentroidesIniciales(int k) {
+		Random rnd = new Random();
 		Iterator<Entidad> it = this.pListaEntidades.getIterador();
 		Entidad ent = null;
-		double dist = 0;
 		while(it.hasNext()) {
 			ent = it.next();
-			if(ent.atributo(0) > dist) {
-				dist = ent.atributo(0);
-			}
+			ent.asignarCluster(rnd.nextInt(k));
 		}
-		dist = dist / k;
-		double p = 0;
-		ListaEntidades centroides = new ListaEntidades();
-		for(int i = 0; i < k; i++) {
-			ent = new Entidad(k);
-			ent.anadir(p + dist);
-			int l = this.pListaEntidades.entidad(0).size();
-			for(int x = 1; x < l; x++) {
-				ent.anadir(0);
-			}
-			p = p +dist;
-			centroides.anadir(ent);
+		
+		ListaEntidades nuevaListaCentroide = new ListaEntidades();
+		//Hemos clasificado las instancias ahora recalculamos el centroide.
+		for(int z=0;z<this.getK();z++) {
+			ListaEntidades le = this.pListaEntidades.buscarPorCluster(z);
+			nuevaListaCentroide.anadir(le.recalcularCentroide());
 		}
-		return centroides;
+		
+		return nuevaListaCentroide;
 	}
 }

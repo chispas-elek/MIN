@@ -36,6 +36,7 @@ private ListaEntidades centroides;
 				//Aqui se acumula las sumas
 				acum = acum + Math.pow(Math.abs(pEntidad.atributo(l) - this.centroides.entidad(i).atributo(l)),this.getM());
 			}
+			
 			//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
 			float root = this.getM();
 			double result = Math.pow(acum, 1.0/root);

@@ -39,13 +39,13 @@ public class Main {
 								System.out.println("Inserte el numero de ciclos");
 								Scanner read2 = new Scanner(System.in);
 								int pRead2 = read2.nextInt();
-								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead2, false);
-								pKMeans.recycle(false);
+								KMeans pKMeans = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), pRead2);
+								pKMeans.recycle();
 								break;
 							case 2:
 								menu2a = true;
-								KMeans pKMeans2 = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())), false);
-								pKMeans2.recycle(false);
+								KMeans pKMeans2 = new KMeans(lista, loadP.getM(), lista.randomSelect(Integer.parseInt(loadP.getK())));
+								pKMeans2.recycle();
 								break;
 							default: 
 								System.out.println("Opcion no valida.");
@@ -72,13 +72,13 @@ public class Main {
 								System.out.println("Inserte el numero de ciclos");
 								Scanner read4 = new Scanner(System.in);
 								int pRead4 = read4.nextInt();
-								KMeans pKMeans3 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()), pRead4, true);
-								pKMeans3.recycle(true);
+								KMeans pKMeans3 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()), pRead4);
+								pKMeans3.recycle();
 								break;
 							case 2:
 								menu2b = true;
-								KMeans pKMeans4 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()), true);
-								pKMeans4.recycle(true);
+								KMeans pKMeans4 = new KMeans(lista, loadP.getM(), Integer.parseInt(loadP.getK()));
+								pKMeans4.recycle();
 								break;
 							default: 
 								System.out.println("Opcion no valida.");
