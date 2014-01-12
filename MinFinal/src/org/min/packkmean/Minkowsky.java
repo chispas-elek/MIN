@@ -5,7 +5,7 @@ import java.util.Vector;
 
 
 public class Minkowsky {
-private int m;
+private double m;
 private ListaEntidades centroides;
 	
 	/**
@@ -16,7 +16,7 @@ private ListaEntidades centroides;
 	 * @param pN the value of the number of parameters in the data set.
 	 * @param pM the value to use Minkownsky algorithm.
 	 */
-	public Minkowsky(int pM, ListaEntidades pLista) {
+	public Minkowsky(double pM, ListaEntidades pLista) {
 		this.m = pM;
 		this.centroides = pLista;
 	}
@@ -38,7 +38,7 @@ private ListaEntidades centroides;
 			}
 			
 			//Aqui se hace la raiz. y se guarda el resultado DE FORMA ORDENADA.
-			float root = this.getM();
+			double root = this.getM();
 			double result = Math.pow(acum, 1.0/root);
 			distancias.add(result);
 		}
@@ -86,7 +86,7 @@ private ListaEntidades centroides;
 	
 	
 
-	private int getM() {
+	private double getM() {
 		return m;
 	}
 	

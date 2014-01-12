@@ -22,14 +22,14 @@ public class KMeans {
 	 */
 	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom) {
 		this.pListaEntidades = pListaEnt;
-		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
+		this.pMinkowsky = new Minkowsky(Double.parseDouble(m), pRandom);
 		this.actualizarEntidades();
 		this.k=pRandom.size();
 	}
 	
 	public KMeans(ListaEntidades pListaEnt, String m, ListaEntidades pRandom, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
-		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), pRandom);
+		this.pMinkowsky = new Minkowsky(Double.parseDouble(m), pRandom);
 		this.actualizarEntidades();
 		this.ciclos = pCiclos;
 		this.k=pRandom.size();
@@ -37,14 +37,14 @@ public class KMeans {
 	
 	public KMeans(ListaEntidades pListaEnt, String m, int k, int pCiclos) {
 		this.pListaEntidades = pListaEnt;
-		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.pMinkowsky = new Minkowsky(Double.parseDouble(m), this.calcularCentroidesIniciales(k));
 		this.ciclos = pCiclos;
 		this.k=k;
 	}
 	
 	public KMeans(ListaEntidades pListaEnt, String m, int k) {
 		this.pListaEntidades = pListaEnt;
-		this.pMinkowsky = new Minkowsky(Integer.parseInt(m), this.calcularCentroidesIniciales(k));
+		this.pMinkowsky = new Minkowsky(Double.parseDouble(m), this.calcularCentroidesIniciales(k));
 		this.k=k;
 	}
 	
@@ -152,7 +152,10 @@ public class KMeans {
 		//Hemos clasificado las instancias ahora recalculamos el centroide.
 		for(int z=0;z<this.getK();z++) {
 			ListaEntidades le = this.pListaEntidades.buscarPorCluster(z);
-			nuevaListaCentroide.anadir(le.recalcularCentroide());
+			Entidad e = le.recalcularCentroide();
+			if(e != null) {
+				nuevaListaCentroide.anadir(e);
+			}
 		}
 		
 		return nuevaListaCentroide;

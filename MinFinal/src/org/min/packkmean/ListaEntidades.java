@@ -69,23 +69,26 @@ public class ListaEntidades {
 	}
 	
 	public Entidad recalcularCentroide() {
-		Entidad nuevo = new Entidad();
+		Entidad nuevo = null;
 		Entidad ent = null;
 		double adder = 0;
 		double media = 0;
-		int i = this.lEntidades.elementAt(0).size();
-		for(int j = 0; j < i; j++) {
-			Iterator<Entidad> it = this.getIterador();
-			while(it.hasNext()) {
-				ent = it.next();
-				adder = adder + ent.atributo(j);	
-			}
-			System.out.println("Vale "+this.lEntidades.size());
-			media = adder / this.lEntidades.size();
-			nuevo.anadir(media);
-			adder = 0;
-			media = 0;
-		}	
+		if(this.lEntidades.size() > 0) {
+			nuevo = new Entidad();
+			int i = this.lEntidades.elementAt(0).size();
+			for(int j = 0; j < i; j++) {
+				Iterator<Entidad> it = this.getIterador();
+				while(it.hasNext()) {
+					ent = it.next();
+					adder = adder + ent.atributo(j);	
+				}
+				System.out.println("Vale "+this.lEntidades.size());
+				media = adder / this.lEntidades.size();
+				nuevo.anadir(media);
+				adder = 0;
+				media = 0;
+			}	
+		}
 		return nuevo;
 	}
 	

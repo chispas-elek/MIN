@@ -95,7 +95,7 @@ public class Entidad {
 	}
 	
 	public void inicializar(int pK) {
-		this.mPertenencia.removeAllElements();
+		this.mPertenencia = new Vector<Integer>();
 		for(int i = 0; i < pK; i++) {
 			this.mPertenencia.add(0);
 		}
